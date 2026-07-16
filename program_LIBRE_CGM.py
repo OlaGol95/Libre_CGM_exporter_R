@@ -384,8 +384,12 @@ def run_iglu_summary(visit_frames):
     try:
         pd.DataFrame(rows).to_csv(input_path, index=False, encoding="utf-8")
         script_path.write_text("\n".join([
-            "args <- commandArgs(trailingOnly = TRUE)",
-            "suppressPackageStartupMessages(library(iglu))",
+    "args <- commandArgs(trailingOnly = TRUE)",
+    "options(repos = c(CRAN = 'https://cloud.r-project.org'))",
+    "if (!requireNamespace('iglu', quietly = TRUE)) {",
+    "  install.packages('iglu')",
+    "}",
+    "suppressPackageStartupMessages(library(iglu))",
             "d <- read.csv(args[1], stringsAsFactors = FALSE)",
             "d$time <- as.POSIXct(d$time, tz = 'UTC')",
             "d$gl <- as.numeric(d$gl)",
