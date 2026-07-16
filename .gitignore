@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+data_visits.xlsx
+libre_dates_password.txt
+program_LIBRE_CGM_settings.sqlite3
